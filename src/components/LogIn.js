@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Errors from "./Errors";
 import FormField from "./FormField";
 
-const LogIn = () => {
+const LogIn = ({ updateStatus }) => {
     const nav = useNavigate();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
@@ -36,6 +36,7 @@ const LogIn = () => {
         } else {
             localStorage.setItem('token', data.token);
             localStorage.setItem('user', JSON.stringify(data.user));
+            updateStatus();
             nav('/');
         }
     }
