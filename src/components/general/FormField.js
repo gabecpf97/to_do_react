@@ -5,8 +5,14 @@ const FormField = ({ name, type, require, value, handleChange }) => {
     return (
         <div className="field">
             <label htmlFor={name}>{name}: </label>
-            <input type={type} name={name} required={require}
-                value={value} onChange={(e) => handleChange(e)} />
+            {type !== "textarea" &&
+                <input type={type} name={name} required={require}
+                    value={value} onChange={(e) => handleChange(e)} />
+            }
+            {type === "textarea" &&
+                <textarea name={name} required={require} 
+                    value={value} onChange={(e) => handleChange(e)} />
+            }
         </div>
     )
 }

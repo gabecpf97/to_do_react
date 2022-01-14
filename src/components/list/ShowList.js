@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Errors from "../general/Errors";
+import CreateItem from "./CreateItem";
 
 const ShowList = ({ id }) => {
     const [items, setItems] = useState();
+    const [refresh, setRefresh] = useState();
     const [errors, setErros] = useState();
 
     useEffect(() => {
@@ -24,14 +26,22 @@ const ShowList = ({ id }) => {
             }
         }
         fetchItems();
-    }, [id]);
+    }, [id, refresh]);
+
+    const handleRefresh = () => {
+        setRefresh(refresh => !refresh);
+    }
 
     return (
         <div className="list">
+            {items && <CreateItem reload={handleRefresh} belong={id} />}
             <ul className="items">
                 {items && items.map(item => {
                     return (
-                        <li key={item.id} className="item">{item.title}</li>
+                        <li key={item.id} className="item">
+                            <p>{item.title}</p>
+                            <p>{item.priority}</p>
+                        </li>
                     )
                 })}
                 {items && items.length < 1 &&
