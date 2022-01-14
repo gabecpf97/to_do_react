@@ -55,6 +55,9 @@ const ItemForm = ({ reload, belong, item }) => {
             setErrors(data);
         } else {
             setToggle(toggle => !toggle);
+            setTitle('');
+            setMessage('');
+            setPriority('');
             reload();
         }
     }

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Errors from "../general/Errors";
 
-const ItemDelete = ({ id, onCancel, reload }) => {
+const ItemDelete = ({ id, reload }) => {
     const [errors, setErrors] = useState();
 
     const handleClicked = async () => {
@@ -23,7 +23,6 @@ const ItemDelete = ({ id, onCancel, reload }) => {
         <div className="delete_item">
             <h3>Really Delete?</h3>
             <button onClick={() => handleClicked()}>Yes</button>
-            <button onClick={() => onCancel()}>Cancel</button>
             {errors && <Errors errors={errors} />}
         </div>
     )
