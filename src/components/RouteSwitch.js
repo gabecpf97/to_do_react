@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import Home from "./Home";
-import LogIn from "./LogIn";
+import LogIn from "./account/LogIn";
 import Menu from "./Menu";
-import SignUp from "./SignUp";
+import SignUp from "./account/SignUp";
 
 const RouteSwitch = () => {
     const prefix = "";

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Errors from "./Errors";
-import ListTab from "./ListTab";
-import ShowList from "./ShowList";
+import Errors from "./general/Errors";
+import ListTab from "./list/ListTab";
+import ShowList from "./list/ShowList";
 
 const Home = () => {
     const nav = useNavigate();

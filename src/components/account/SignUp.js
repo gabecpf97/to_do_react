@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Errors from "./Errors";
-import FormField from "./FormField";
+import Errors from "../general/Errors";
+import FormField from "../general/FormField";
 
 const SignUp = ({ updateStatus }) => {
     const nav = useNavigate();

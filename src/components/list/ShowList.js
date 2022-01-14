@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Errors from "./Errors";
+import Errors from "../general/Errors";
 
 const ShowList = ({ id }) => {
     const [items, setItems] = useState();
