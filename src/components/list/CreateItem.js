@@ -41,10 +41,10 @@ const CreateItem = ({ reload, belong }) => {
             }
         });
         const data = await response.json();
-        console.log(data);
         if (data.err || data.errors) {
             setErrors(data);
         } else {
+            setToggle(toggle => !toggle);
             reload();
         }
     }

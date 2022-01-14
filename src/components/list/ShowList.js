@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Errors from "../general/Errors";
 import CreateItem from "./CreateItem";
+import ListItem from "./ListItem";
 
 const ShowList = ({ id }) => {
     const [items, setItems] = useState();
@@ -38,10 +39,7 @@ const ShowList = ({ id }) => {
             <ul className="items">
                 {items && items.map(item => {
                     return (
-                        <li key={item.id} className="item">
-                            <p>{item.title}</p>
-                            <p>{item.priority}</p>
-                        </li>
+                        <ListItem item={item} key={item.id} />
                     )
                 })}
                 {items && items.length < 1 &&
