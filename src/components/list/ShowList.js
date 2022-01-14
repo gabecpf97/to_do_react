@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Errors from "../general/Errors";
-import CreateItem from "./CreateItem";
+import ItemForm from "./ItemForm";
 import ListItem from "./ListItem";
 
 const ShowList = ({ id }) => {
@@ -35,11 +35,11 @@ const ShowList = ({ id }) => {
 
     return (
         <div className="list">
-            {items && <CreateItem reload={handleRefresh} belong={id} />}
+            {items && <ItemForm reload={handleRefresh} belong={id} />}
             <ul className="items">
                 {items && items.map(item => {
                     return (
-                        <ListItem item={item} key={item.id} />
+                        <ListItem item={item} key={item.id} reload={handleRefresh} />
                     )
                 })}
                 {items && items.length < 1 &&

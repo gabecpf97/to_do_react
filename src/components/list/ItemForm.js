@@ -1,13 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Errors from "../general/Errors";
 import FormField from "../general/FormField";
 
-const CreateItem = ({ reload, belong }) => {
+const ItemForm = ({ reload, belong, item }) => {
     const [toggle, setToggle] = useState(false);
-    const [title, setTitle] = useState();
-    const [message, setMessage] = useState();
-    const [priority, setPriority] = useState();
+    const [title, setTitle] = useState('');
+    const [message, setMessage] = useState('');
+    const [priority, setPriority] = useState('');
     const [errors, setErrors] = useState();
+
+    useEffect(() => {
+        if (item) {
+            setTitle(item.title);
+            setMessage(item.message);
+            setPriority(item.priority);
+            setToggle(true);
+        }
+    }, [item]);
 
     const onTitleChange = (e) => {
         setTitle(e.target.value);
@@ -27,8 +36,9 @@ const CreateItem = ({ reload, belong }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch(`http://localhost:5000/item`, {
-            method: "POST",
+
+        const response = await fetch(`http://localhost:5000/item${item ? `/${item.id}` : ''}`, {
+            method: item ? 'PUT' : 'POST',
             body: JSON.stringify({
                 title,
                 message,
@@ -51,20 +61,22 @@ const CreateItem = ({ reload, belong }) => {
 
     return (
         <div className="create_item">
-            {!toggle && <button onClick={() => handleToggle()}>Add Item</button>}
+            {!item &&
+                <button onClick={() => handleToggle()}>{toggle ? 'Cancel' : 'Add Item'}</button>
+            }
             {toggle &&
                 <form onSubmit={(e) => handleSubmit(e)}>
                     <FormField name="Title" type="text" require={true}
-                        handleChange={onTitleChange} />
+                        handleChange={onTitleChange} value={title} />
                     <FormField name="Message" type="text"
-                        handleChange={onMessageChange} />
+                        handleChange={onMessageChange} value={message} />
                     <label>priority: </label>
-                    <select required={true} onChange={(e) => onPriorityChange(e)}>
+                    <select required={true} value={priority} onChange={(e) => onPriorityChange(e)}>
                         <option value="0">Low</option>
                         <option value="1">Middle</option>
                         <option value="2">High</option>
                     </select>
-                    <input type="submit" value="Add" />
+                    <input type="submit" value={item ? 'edit' : 'Add'} />
                 </form>
             }
             {errors && <Errors errors={errors} />}
@@ -72,4 +84,4 @@ const CreateItem = ({ reload, belong }) => {
     )
 }
 
-export default CreateItem;
+export default ItemForm;
