@@ -63,6 +63,7 @@ const Home = () => {
             {lists && display && 
                 <div className="content">
                     <div className="list_control">
+                        <h2>Lists: </h2>
                         <ListForm reload={handleRefresh} />
                         <ListTab lists={lists} clicked={handleDisplay} 
                             refresh={handleRefresh} display={display}/>

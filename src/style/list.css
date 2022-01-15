@@ -10,18 +10,17 @@
     flex: 1;
 }
 
-.list {
-    /* display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 20px; */
+.lists {
+    padding: 0px 10px;
     display: grid;
-    grid-template-columns: 200px 1fr;
-    column-gap: 20px;
+    grid-template-columns: 150px;
+    row-gap: 5px;
 }
 
-.list_fun {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.list button {
+    width: 100%;
+}
+
+.selected_list {
+    background-color: cadetblue;
 }

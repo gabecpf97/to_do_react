@@ -6,7 +6,8 @@ const ListTab = ({ lists, clicked, refresh, display }) => {
             {lists.map(list => {
                 return (
                     <li className="list" key={list.id}>
-                        <button onClick={() => clicked({id: list.id, name: list.name})}>
+                        <button className={display.id === list.id ? 'selected_list' : ''} 
+                            onClick={() => clicked({id: list.id, name: list.name})}>
                             {list.name}    
                         </button>
                     </li>
