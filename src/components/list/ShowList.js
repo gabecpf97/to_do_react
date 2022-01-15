@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Errors from "../general/Errors";
-import ItemForm from "./ItemForm";
-import ListItem from "./ListItem";
+import ItemForm from "../item/ItemForm";
+import ListItem from "../item/ListItem";
 
 const ShowList = ({ id }) => {
     const [prev, setPrev] = useState();
