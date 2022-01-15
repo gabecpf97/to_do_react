@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Errors from "./general/Errors";
+import ListForm from "./list/ListForm";
 import ListTab from "./list/ListTab";
 import ShowList from "./list/ShowList";
 
@@ -8,6 +9,7 @@ const Home = () => {
     const nav = useNavigate();
     const [lists, setLists] = useState();
     const [display, setDisplay] = useState();
+    const [refresh, setRefresh] = useState(false);
     const [errors, setErrors] = useState();
 
     useEffect(() => {
@@ -23,6 +25,7 @@ const Home = () => {
                     if (data.err) {
                         setErrors(data);
                     } else {
+                        setRefresh(false);
                         setDisplay(data.result[0].id);
                         setLists(data.result);
                     }
@@ -35,16 +38,21 @@ const Home = () => {
         if (!localStorage.token) {
             nav('/login');
         } else {
-            fetchList();
+            if (!lists || refresh)
+                fetchList();
         }
 
         return () => {
             isMount = false;
         }
-    }, [nav]);
+    }, [nav, lists, refresh]);
 
     const handleDisplay = (targetId) => {
         setDisplay(targetId);
+    }
+
+    const handleRefresh = () => {
+        setRefresh(true);
     }
 
     return (
@@ -52,7 +60,8 @@ const Home = () => {
             <h1>Welcome to to do list</h1>
             {lists && display && 
                 <div className="lists">
-                    <ListTab lists={lists} clicked={handleDisplay} />
+                    <ListForm reload={handleRefresh} />
+                    <ListTab lists={lists} clicked={handleDisplay} refresh={handleRefresh}/>
                     <ShowList id={display} />
                 </div>
             }

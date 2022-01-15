@@ -4,6 +4,7 @@ import ItemForm from "./ItemForm";
 import ListItem from "./ListItem";
 
 const ShowList = ({ id }) => {
+    const [prev, setPrev] = useState();
     const [items, setItems] = useState();
     const [refresh, setRefresh] = useState(false);
     const [errors, setErros] = useState();
@@ -17,20 +18,27 @@ const ShowList = ({ id }) => {
                     }
                 });
                 const data = await response.json();
-                if (data.err || data.errors) {
-                    setErros(data);
-                } else {
-                    setItems(data.itemList);
-                    setRefresh(false);
+                if (isMounted) {
+                    if (data.err || data.errors) {
+                        setErros(data);
+                    } else {
+                        setPrev(id);
+                        setItems(data.itemList);
+                        setRefresh(false);
+                    }
                 }
             } catch (err) {
                 setErros(err);
             }
         }
-        if (!items || refresh) {
+        let isMounted = true;
+        if (!items || refresh || id !== prev) {
             fetchItems();
         }
-    }, [id, items, refresh]);
+        return () => {
+            isMounted = false;
+        }
+    }, [id, items, refresh, prev]);
 
     const handleRefresh = () => {
         setRefresh(true);
