@@ -7,6 +7,7 @@ const ItemForm = ({ reload, belong, item }) => {
     const [title, setTitle] = useState('');
     const [message, setMessage] = useState('');
     const [priority, setPriority] = useState('');
+    const [due_date, setDue_date] = useState('');
     const [errors, setErrors] = useState();
 
     useEffect(() => {
@@ -30,19 +31,23 @@ const ItemForm = ({ reload, belong, item }) => {
         setPriority(e.target.value);
     }
 
+    const onDateChange = (e) => {
+        setDue_date(e.target.value);
+    }
+
     const handleToggle = () => {
         setToggle(toggle => !toggle);
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         const response = await fetch(`http://localhost:5000/item${item ? `/${item.id}` : ''}`, {
             method: item ? 'PUT' : 'POST',
             body: JSON.stringify({
                 title,
                 message,
                 priority,
+                due_date,
                 belong
             }),
             headers: {
@@ -58,6 +63,7 @@ const ItemForm = ({ reload, belong, item }) => {
             setTitle('');
             setMessage('');
             setPriority('');
+            setDue_date('');
             reload();
         }
     }
@@ -79,6 +85,8 @@ const ItemForm = ({ reload, belong, item }) => {
                         <option value="1">Middle</option>
                         <option value="2">High</option>
                     </select>
+                    <FormField name="due_date" type="date" require={true}
+                        handleChange={onDateChange} value={due_date} />
                     <input type="submit" value={item ? 'edit' : 'Add'} />
                 </form>
             }

@@ -15,6 +15,7 @@ const ItemDetail = ({ item, refresh }) => {
             <p>
                 Priority: {item.priority < 1 ? 'Low' : item.priority < 2 ? 'Middle' : 'High'}
             </p>
+            <p>Due: {item.due_date.substring(0, 10)}</p>
             {item.message && 
                 <div className="message">
                     <button onClick={() => handleMsgClicked()}>
