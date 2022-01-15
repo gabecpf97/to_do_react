@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Errors from "../general/Errors";
-import ItemDelete from "./ItemDelete";
+import DeleteBtn from "./DeleteBtn";
 import ItemForm from "./ItemForm";
 
 const ListItem = ({ id, refresh }) => {
@@ -8,7 +8,6 @@ const ListItem = ({ id, refresh }) => {
     const [errors, setErrors] = useState();
     const [msgToggle, setMsgToggle] = useState(false);
     const [editToggle, setEditToggle] = useState(false);
-    const [deleteToggle, setDeleteToggle] = useState(false);
     const [reload, setReload] = useState(false);
 
     useEffect(() => {
@@ -43,17 +42,11 @@ const ListItem = ({ id, refresh }) => {
         setEditToggle(!editToggle);
     }
 
-    const handleDeleteClicked = () => {
-        setDeleteToggle(!deleteToggle);
-    }
-
     const handleRefresh = () => {
         if (editToggle) {
             setEditToggle(!editToggle);
             setReload(true);
-        }
-        if (deleteToggle) {
-            setDeleteToggle(!deleteToggle);
+        } else {
             refresh();
         }
     }
@@ -82,10 +75,7 @@ const ListItem = ({ id, refresh }) => {
                         </button>
                         {editToggle && <ItemForm item={item} reload={handleRefresh} />}
                     </div>
-                    <div className="delete_item">
-                        <button onClick={() => handleDeleteClicked()}>{deleteToggle ? 'Cancel' : 'Delete' }</button>
-                        {deleteToggle && <ItemDelete id={item.id} reload={handleRefresh} />}
-                    </div>
+                    <DeleteBtn item={item} refresh={handleRefresh} />
                 </div>
             }
             {errors && <Errors errors={errors} />}
