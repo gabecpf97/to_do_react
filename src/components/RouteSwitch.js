@@ -4,6 +4,7 @@ import Home from "./Home";
 import LogIn from "./account/LogIn";
 import Menu from "./Menu";
 import SignUp from "./account/SignUp";
+import "../style/style.css";
 
 const RouteSwitch = () => {
     const prefix = "";

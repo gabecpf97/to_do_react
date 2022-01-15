@@ -1,19 +1,14 @@
 import React from "react";
-import DeleteBtn from "./DeleteBtn";
-import ListForm from "./ListForm";
-
-const ListTab = ({ lists, clicked, refresh }) => {
+const ListTab = ({ lists, clicked, refresh, display }) => {
 
     return (
-        <ul className="list">
+        <ul className="lists">
             {lists.map(list => {
                 return (
-                    <li key={list.id}>
-                        <button onClick={() => clicked(list.id)}>
+                    <li className="list" key={list.id}>
+                        <button onClick={() => clicked({id: list.id, name: list.name})}>
                             {list.name}    
                         </button>
-                        <ListForm list={list} reload={refresh} />
-                        <DeleteBtn list={list} refresh={refresh} />
                     </li>
                 )
             })}

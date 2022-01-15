@@ -4,6 +4,7 @@ import Errors from "./general/Errors";
 import ListForm from "./list/ListForm";
 import ListTab from "./list/ListTab";
 import ShowList from "./list/ShowList";
+import "../style/list.css";
 
 const Home = () => {
     const nav = useNavigate();
@@ -26,7 +27,7 @@ const Home = () => {
                         setErrors(data);
                     } else {
                         setRefresh(false);
-                        setDisplay(data.result[0].id);
+                        setDisplay(data.result[0]);
                         setLists(data.result);
                     }
                 }
@@ -47,8 +48,9 @@ const Home = () => {
         }
     }, [nav, lists, refresh]);
 
-    const handleDisplay = (targetId) => {
-        setDisplay(targetId);
+    const handleDisplay = (targetList) => {
+        // console.log(id, name);
+        setDisplay(targetList);
     }
 
     const handleRefresh = () => {
@@ -59,10 +61,13 @@ const Home = () => {
         <div className="home">
             <h1>Welcome to to do list</h1>
             {lists && display && 
-                <div className="lists">
-                    <ListForm reload={handleRefresh} />
-                    <ListTab lists={lists} clicked={handleDisplay} refresh={handleRefresh}/>
-                    <ShowList id={display} />
+                <div className="content">
+                    <div className="list_control">
+                        <ListForm reload={handleRefresh} />
+                        <ListTab lists={lists} clicked={handleDisplay} 
+                            refresh={handleRefresh} display={display}/>
+                    </div>
+                    <ShowList list={display} to_reload={handleRefresh} />
                 </div>
             }
             {errors && <Errors errors={errors} />}

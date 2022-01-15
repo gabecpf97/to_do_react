@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import Errors from "../general/Errors";
 import ItemForm from "../item/ItemForm";
 import ListItem from "../item/ListItem";
+import DeleteBtn from "./DeleteBtn";
+import ListForm from "./ListForm";
 
-const ShowList = ({ id }) => {
+const ShowList = ({ list, to_reload }) => {
     const [prev, setPrev] = useState();
     const [items, setItems] = useState();
     const [refresh, setRefresh] = useState(false);
@@ -12,7 +14,7 @@ const ShowList = ({ id }) => {
     useEffect(() => {
         const fetchItems = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/all_item/${id}`, {
+                const response = await fetch(`http://localhost:5000/all_item/${list.id}`, {
                     headers: {
                         "Authorization": `Bearer ${localStorage.token}`,
                     }
@@ -22,7 +24,7 @@ const ShowList = ({ id }) => {
                     if (data.err || data.errors) {
                         setErros(data);
                     } else {
-                        setPrev(id);
+                        setPrev(list.id);
                         setItems(data.itemList);
                         setRefresh(false);
                     }
@@ -32,21 +34,23 @@ const ShowList = ({ id }) => {
             }
         }
         let isMounted = true;
-        if (!items || refresh || id !== prev) {
+        if (!items || refresh || list.id !== prev) {
             fetchItems();
         }
         return () => {
             isMounted = false;
         }
-    }, [id, items, refresh, prev]);
+    }, [list, items, refresh, prev]);
 
     const handleRefresh = () => {
         setRefresh(true);
     }
 
     return (
-        <div className="list">
-            <ItemForm reload={handleRefresh} belong={id} />
+        <div className="cur_list">
+            <ItemForm reload={handleRefresh} belong={list.id} />
+            <ListForm list={list} reload={to_reload} />
+            <DeleteBtn list={list} refresh={to_reload} />
             {items &&
                 <ul className="items">
                     {items && items.map(item => {

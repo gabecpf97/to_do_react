@@ -1,0 +1,27 @@
+.content {
+    display: flex;
+    justify-content: space-around;
+    /* align-items: center; */
+    gap: 2.5vw;
+    padding: 0px 2.5vw;
+}
+
+.cur_list {
+    flex: 1;
+}
+
+.list {
+    /* display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px; */
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    column-gap: 20px;
+}
+
+.list_fun {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
