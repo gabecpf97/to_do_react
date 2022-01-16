@@ -44,7 +44,7 @@ const ListForm = ({ list, reload }) => {
     return (
         <div className="list_form">
             <button onClick={() => handleToggle()}>
-                {toggle ? 'Cancel' : list ? 'Edit name' : 'Add List'}
+                {toggle ? 'Cancel' : list ? 'Edit List Name' : 'Add List'}
             </button>
             {toggle && 
                 <form onSubmit={(e) => handleSubmit(e)}>

@@ -48,9 +48,12 @@ const ShowList = ({ list, to_reload }) => {
 
     return (
         <div className="cur_list">
-            <ItemForm reload={handleRefresh} belong={list.id} />
-            <ListForm list={list} reload={to_reload} />
-            <DeleteBtn list={list} refresh={to_reload} />
+            <h2>{list.name}</h2>
+            <div className="modify_list">
+                <ListForm list={list} reload={to_reload} />
+                <DeleteBtn list={list} refresh={to_reload} />
+                <ItemForm reload={handleRefresh} belong={list.id} />
+            </div>
             {items &&
                 <ul className="items">
                     {items && items.map(item => {

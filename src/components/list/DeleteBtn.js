@@ -28,7 +28,7 @@ const DeleteBtn = ({ item, list, refresh }) => {
     return (
         <div className="delete">
             <button onClick={() => handleToggle()}>
-                {toggle ? 'Cancel' : 'Delete'}
+                {toggle ? 'Cancel' : list ? 'Delete List' : 'Delete Item'}
             </button>
             {toggle && 
                 <div className="delete">

@@ -1,0 +1,32 @@
+.items {
+}
+
+.item {
+    border: cornflowerblue solid;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    background-color: #a7866b;
+}
+
+.item_detail {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    align-items: center;
+}
+
+.item_detail:hover {
+    background-color: #c5a387;
+}
+
+.basic_detail {
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 1fr 150px 150px ;
+}
+
+.item_modify {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+}

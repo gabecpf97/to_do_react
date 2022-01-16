@@ -3,6 +3,7 @@ import Errors from "../general/Errors";
 import DeleteBtn from "../list/DeleteBtn";
 import EditItem from "./EditItem";
 import ItemDetail from "./ItemDetail";
+import "../../style/item.css";
 
 const ListItem = ({ id, refresh }) => {
     const [item, setItem] = useState();
@@ -47,9 +48,11 @@ const ListItem = ({ id, refresh }) => {
         <li>
             {item && 
                 <div className="item">
+                    <div className="item_modify">
+                        <EditItem item={item} refresh={handleRefresh} />
+                        <DeleteBtn item={item} refresh={refresh} />
+                    </div>
                     <ItemDetail item={item} refresh={handleRefresh}/>
-                    <EditItem item={item} refresh={handleRefresh} />
-                    <DeleteBtn item={item} refresh={refresh} />
                 </div>
             }
             {errors && <Errors errors={errors} />}
