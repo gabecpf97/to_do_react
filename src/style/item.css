@@ -1,4 +1,18 @@
+.all_items {
+    border-radius: 10px;
+    border: black solid;
+    padding: 5px;
+    background-color: #8f6d51;
+}
+
+.list_top {
+    display: grid;
+    grid-template-columns: 100px 1fr 150px 150px;
+    padding: 0px 20px;
+}
+
 .items {
+    margin-top: 0px;
 }
 
 .item {
@@ -6,15 +20,16 @@
     border-radius: 10px;
     margin-bottom: 10px;
     background-color: #a7866b;
+    padding: 10px 20px;
 }
 
-.item_detail {
+.always_on {
     display: grid;
     grid-template-columns: 100px 1fr;
     align-items: center;
 }
 
-.item_detail:hover {
+.item:hover {
     background-color: #c5a387;
 }
 

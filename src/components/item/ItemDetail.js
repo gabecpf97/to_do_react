@@ -10,17 +10,20 @@ const ItemDetail = ({ item, refresh }) => {
 
     return (
         <div className="item_detail">
-            <ChangeItem item={item} reload={refresh} />
-            <div className="basic_detail" onClick={() => handleMsgClicked()}>
-                <p>Title: {item.title}</p>
-                <p>
-                    Priority: {item.priority < 1 ? 'Low' : item.priority < 2 ? 'Middle' : 'High'}
-                </p>
-                <p>Due: {item.due_date.substring(0, 10)}</p>
+            <div className="always_on">
+                <ChangeItem item={item} reload={refresh} />
+                <div className="basic_detail" onClick={() => handleMsgClicked()}>
+                    <p>{item.title}</p>
+                    <p>
+                        {item.priority < 1 ? 'Low' : item.priority < 2 ? 'Middle' : 'High'}
+                    </p>
+                    <p>{item.due_date.substring(0, 10)}</p>
+                </div>
             </div>
-            {item.message && 
+            {item.message && msgToggle &&
                 <div className="message">
-                    {msgToggle && <p>Message: {item.message}</p>}
+                    <h2>Note: </h2>
+                    <p>{item.message}</p>
                 </div>
             }
          </div>

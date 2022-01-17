@@ -54,18 +54,26 @@ const ShowList = ({ list, to_reload }) => {
                 <DeleteBtn list={list} refresh={to_reload} />
                 <ItemForm reload={handleRefresh} belong={list.id} />
             </div>
-            {items &&
-                <ul className="items">
-                    {items && items.map(item => {
-                        return (
-                            <ListItem id={item.id} key={item.id} refresh={handleRefresh} />
-                        )
-                    })}
-                    {items && items.length < 1 &&
-                        <li className="item">Empty list add item now</li>
-                    }
-                </ul>
-            }
+            <div className="all_items">
+                <div className="list_top">
+                    <p>Status</p>
+                    <p>Title</p>
+                    <p>Priority</p>
+                    <p>Due Date</p>
+                </div>
+                {items &&
+                    <ul className="items">
+                        {items && items.map(item => {
+                            return (
+                                <ListItem id={item.id} key={item.id} refresh={handleRefresh} />
+                            )
+                        })}
+                        {items && items.length < 1 &&
+                            <li className="item">Empty list add item now</li>
+                        }
+                    </ul>
+                }
+            </div>
             {errors && <Errors errors={errors} />}
         </div>
     )
